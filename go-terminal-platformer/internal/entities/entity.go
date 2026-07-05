@@ -70,6 +70,7 @@ const (
 	PowerUpNone PowerUpType = iota
 	PowerUpFire
 	PowerUpStar
+	PowerUpMushroom
 	PowerUpSpeedBoots
 	PowerUpSuperJump
 	PowerUpShield

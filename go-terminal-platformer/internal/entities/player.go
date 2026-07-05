@@ -68,6 +68,7 @@ type PlayerEntity struct {
 	invulnTime   float64
 	powerUp      PowerUpType
 	ammo         int
+	coins        int
 
 	// Animation
 	sprite    *Sprite
@@ -370,6 +371,23 @@ func (p *PlayerEntity) Die() {
 // AddLife adds a life to the player
 func (p *PlayerEntity) AddLife() {
 	p.lives++
+}
+
+// AddCoins adds coins to the player
+func (p *PlayerEntity) AddCoins(amount int) {
+	p.coins += amount
+	
+	// Every 100 coins = 1 extra life
+	if p.coins >= 100 {
+		livesToAdd := p.coins / 100
+		p.lives += livesToAdd
+		p.coins = p.coins % 100
+	}
+}
+
+// GetCoins returns the player's coin count
+func (p *PlayerEntity) GetCoins() int {
+	return p.coins
 }
 
 // ApplyPowerUp applies a power-up to the player
