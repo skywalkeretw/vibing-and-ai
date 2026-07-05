@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/gdamore/tcell/v2"
+	"github.com/lukeroy/go-terminal-platformer/internal/input"
 	"github.com/lukeroy/go-terminal-platformer/internal/renderer"
 )
 
@@ -58,7 +59,7 @@ type Game struct {
 
 	// Game systems
 	renderer *renderer.Renderer
-	// inputMgr    *InputManager (to be implemented in future issues)
+	inputMgr *input.InputManager
 	// physics     *PhysicsEngine (to be implemented in future issues)
 	// levelMgr    *LevelManager (to be implemented in future issues)
 }
@@ -98,6 +99,10 @@ func (g *Game) Initialize() error {
 	if err := g.renderer.Initialize(); err != nil {
 		return fmt.Errorf("failed to initialize renderer: %w", err)
 	}
+
+	// Initialize input manager
+	g.inputMgr = input.New()
+	g.inputMgr.Initialize(screen)
 
 	log.Println("Game initialized successfully")
 	log.Printf("Target FPS: %d", g.targetFPS)
@@ -144,6 +149,11 @@ func (g *Game) Update() {
 		g.currentFPS = g.frameCount
 		g.frameCount = 0
 		g.fpsTimer = 0
+	}
+
+	// Update input manager
+	if g.inputMgr != nil {
+		g.inputMgr.Update(g.deltaTime)
 	}
 
 	// Poll for events
@@ -451,6 +461,11 @@ func (g *Game) Shutdown() {
 	
 	// Stop the game loop
 	g.running = false
+	
+	// Shutdown input manager
+	if g.inputMgr != nil {
+		g.inputMgr.Shutdown()
+	}
 	
 	// Clean up screen
 	if g.screen != nil {
