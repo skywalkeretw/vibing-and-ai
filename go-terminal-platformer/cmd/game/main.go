@@ -2,55 +2,28 @@ package main
 
 import (
 	"log"
+	"os"
 
-	"github.com/gdamore/tcell/v2"
+	"github.com/lukeroy/go-terminal-platformer/internal/engine"
 )
 
 func main() {
-	// Initialize tcell screen
-	screen, err := tcell.NewScreen()
+	// Initialize game
+	g, err := engine.New()
 	if err != nil {
-		log.Fatalf("Failed to create screen: %v", err)
+		log.Fatalf("Failed to create game: %v", err)
 	}
 
-	if err := screen.Init(); err != nil {
-		log.Fatalf("Failed to initialize screen: %v", err)
+	// Initialize game systems
+	if err := g.Initialize(); err != nil {
+		log.Fatalf("Failed to initialize game: %v", err)
 	}
-	defer screen.Fini()
+	defer g.Cleanup()
 
-	// Set up screen
-	screen.Clear()
-	screen.SetStyle(tcell.StyleDefault.
-		Foreground(tcell.ColorWhite).
-		Background(tcell.ColorBlack))
-
-	// Display welcome message
-	message := "Go Terminal Platformer - Press ESC to exit"
-	row := 0
-	for _, r := range message {
-		screen.SetContent(row, 0, r, nil, tcell.StyleDefault)
-		row++
+	// Run game loop
+	if err := g.Run(); err != nil {
+		log.Fatalf("Game error: %v", err)
 	}
 
-	status := "Game starting..."
-	row = 0
-	for _, r := range status {
-		screen.SetContent(row, 2, r, nil, tcell.StyleDefault.Foreground(tcell.ColorGreen))
-		row++
-	}
-
-	screen.Show()
-
-	// Simple event loop
-	for {
-		ev := screen.PollEvent()
-		switch ev := ev.(type) {
-		case *tcell.EventKey:
-			if ev.Key() == tcell.KeyEscape || ev.Key() == tcell.KeyCtrlC {
-				return
-			}
-		case *tcell.EventResize:
-			screen.Sync()
-		}
-	}
+	os.Exit(0)
 }
