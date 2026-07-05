@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/gdamore/tcell/v2"
+	"github.com/lukeroy/go-terminal-platformer/internal/renderer"
 )
 
 // GameState represents the current state of the game
@@ -55,11 +56,11 @@ type Game struct {
 	fpsTimer   float64
 	currentFPS int
 
-	// Game systems (to be implemented in future issues)
-	// renderer    *Renderer
-	// inputMgr    *InputManager
-	// physics     *PhysicsEngine
-	// levelMgr    *LevelManager
+	// Game systems
+	renderer *renderer.Renderer
+	// inputMgr    *InputManager (to be implemented in future issues)
+	// physics     *PhysicsEngine (to be implemented in future issues)
+	// levelMgr    *LevelManager (to be implemented in future issues)
 }
 
 // New creates a new Game instance
@@ -91,6 +92,12 @@ func (g *Game) Initialize() error {
 	g.screen = screen
 	g.running = true
 	g.lastUpdate = time.Now()
+
+	// Initialize renderer
+	g.renderer = renderer.New(screen)
+	if err := g.renderer.Initialize(); err != nil {
+		return fmt.Errorf("failed to initialize renderer: %w", err)
+	}
 
 	log.Println("Game initialized successfully")
 	log.Printf("Target FPS: %d", g.targetFPS)
@@ -210,6 +217,9 @@ func (g *Game) handleInput() {
 		}
 	case *tcell.EventResize:
 		// Handle terminal resize
+		if g.renderer != nil {
+			g.renderer.HandleResize()
+		}
 		g.screen.Sync()
 	}
 }
@@ -251,12 +261,12 @@ func (g *Game) updateVictory() {
 
 // Render renders the current game state
 func (g *Game) Render() {
-	if g.screen == nil {
+	if g.screen == nil || g.renderer == nil {
 		return
 	}
 
 	// Clear screen
-	g.screen.Clear()
+	g.renderer.Clear()
 
 	// Render based on current state
 	switch g.state {
@@ -280,7 +290,7 @@ func (g *Game) Render() {
 	}
 
 	// Show the screen
-	g.screen.Show()
+	g.renderer.Show()
 }
 
 // renderMenu renders the main menu
