@@ -135,7 +135,7 @@ func (b *Block) Update(deltaTime float64) {
 }
 
 // Hit handles the block being hit by a player
-func (b *Block) Hit(player entities.Player, powerUpMgr *entities.PowerUpManager) bool {
+func (b *Block) Hit(player *entities.PlayerEntity, powerUpMgr *entities.PowerUpManager) bool {
 	if b.destroyed {
 		return false
 	}
@@ -202,37 +202,32 @@ func (b *Block) Destroy(powerUpMgr *entities.PowerUpManager) {
 }
 
 // CheckHitFromBelow checks if a player hit the block from below
-func (b *Block) CheckHitFromBelow(player entities.Player) bool {
+func (b *Block) CheckHitFromBelow(player *entities.PlayerEntity) bool {
 	if b.destroyed {
 		return false
 	}
 
 	playerPos := player.GetPosition()
-	playerBody := player.GetPhysicsBody()
+	blockBounds := b.collider.GetBounds()
 	
-	if playerBody == nil {
-		return false
-	}
+	// Simple collision check - player position is roughly at center
+	// Assume player is 16x32 pixels
+	playerTop := playerPos.Y
+	playerBottom := playerPos.Y + 32
+	playerLeft := playerPos.X
+	playerRight := playerPos.X + 16
+	
+	blockBottom := blockBounds.Y + blockBounds.Height
+	blockTop := blockBounds.Y
+	blockLeft := blockBounds.X
+	blockRight := blockBounds.X + blockBounds.Width
 
-	// Check if player is below the block
-	if playerPos.Y > b.position.Y {
-		// Check if player's top collides with block's bottom
-		playerBounds := playerBody.Collider.GetBounds()
-		blockBounds := b.collider.GetBounds()
-		
-		playerTop := playerBounds.Y
-		blockBottom := blockBounds.Y + blockBounds.Height
-		
-		// Check vertical overlap
-		if playerTop <= blockBottom && playerTop >= blockBottom-8 {
-			// Check horizontal overlap
-			if playerBounds.X < blockBounds.X+blockBounds.Width &&
-				playerBounds.X+playerBounds.Width > blockBounds.X {
-				// Check if player is moving upward
-				if playerBody.Velocity.Y < 0 {
-					return true
-				}
-			}
+	// Check if player is below the block and moving upward
+	if playerTop < blockBottom && playerBottom > blockTop {
+		// Check horizontal overlap
+		if playerLeft < blockRight && playerRight > blockLeft {
+			// Player is colliding with block from below
+			return true
 		}
 	}
 

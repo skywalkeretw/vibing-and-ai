@@ -379,6 +379,15 @@ func (pe *PhysicsEngine) GetCollisionCount() int {
 	return len(pe.collisions)
 }
 
+// ClearStaticColliders removes all static colliders
+func (pe *PhysicsEngine) ClearStaticColliders() {
+	pe.mutex.Lock()
+	defer pe.mutex.Unlock()
+
+	pe.staticColliders = make([]Collider, 0)
+	pe.spatialGrid.Clear()
+}
+
 // Clear removes all bodies and colliders
 func (pe *PhysicsEngine) Clear() {
 	pe.mutex.Lock()
