@@ -1,0 +1,88 @@
+{
+  "id": "world1-level6",
+  "world": 1,
+  "levelNum": 6,
+  "name": "Boss - Goomba King",
+  "width": 150,
+  "height": 30,
+  "tiles": [
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "                                                                                                                                                      ",
+    "======================================================================================================================================================================"
+  ],
+  "spawnPoints": [
+    {"type": "player", "x": 10, "y": 27},
+    {"type": "boss", "bossType": "goomba_king", "x": 120, "y": 27, "hp": 10, "phases": 3},
+    {"type": "fireflower", "x": 75, "y": 20}
+  ],
+  "checkpoints": [
+    {"x": 10, "y": 27}
+  ],
+  "goal": {"x": 145, "y": 27},
+  "background": "grassland",
+  "theme": "grassland",
+  "difficulty": "boss",
+  "timeLimit": 600,
+  "isBossLevel": true,
+  "bossData": {
+    "name": "Goomba King",
+    "type": "goomba_king",
+    "maxHP": 10,
+    "phases": [
+      {
+        "phase": 1,
+        "hpThreshold": 10,
+        "attackPattern": "slow_charge",
+        "speed": 1.0,
+        "attackInterval": 3.0
+      },
+      {
+        "phase": 2,
+        "hpThreshold": 7,
+        "attackPattern": "fast_charge_with_minions",
+        "speed": 1.5,
+        "attackInterval": 2.0,
+        "spawnMinions": true,
+        "minionType": "goomba",
+        "minionCount": 2
+      },
+      {
+        "phase": 3,
+        "hpThreshold": 3,
+        "attackPattern": "rage_mode",
+        "speed": 2.0,
+        "attackInterval": 1.0,
+        "spawnMinions": true,
+        "minionType": "goomba",
+        "minionCount": 3
+      }
+    ]
+  }
+}
