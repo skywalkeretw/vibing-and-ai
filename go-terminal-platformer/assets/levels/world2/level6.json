@@ -1,0 +1,89 @@
+{
+  "id": "world2-level6",
+  "world": 2,
+  "levelNum": 6,
+  "name": "Boss - Sand Serpent",
+  "width": 180,
+  "height": 30,
+  "tiles": [
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "                                                                                                                                                                                    ",
+    "===================================================================================================================================================================================================="
+  ],
+  "spawnPoints": [
+    {"type": "player", "x": 10, "y": 27},
+    {"type": "boss", "bossType": "sand_serpent", "x": 140, "y": 20, "hp": 15, "phases": 3},
+    {"type": "fireflower", "x": 30, "y": 27}
+  ],
+  "checkpoints": [
+    {"x": 10, "y": 27}
+  ],
+  "goal": {"x": 170, "y": 27},
+  "background": "desert",
+  "theme": "desert_boss",
+  "difficulty": "boss",
+  "timeLimit": 600,
+  "bossArena": {
+    "enabled": true,
+    "bossName": "Sand Serpent",
+    "bossType": "sand_serpent",
+    "startX": 50,
+    "endX": 170,
+    "phases": [
+      {
+        "phase": 1,
+        "hpThreshold": 15,
+        "attackPattern": "basic_charge",
+        "speed": 2.0,
+        "attackCooldown": 3.0
+      },
+      {
+        "phase": 2,
+        "hpThreshold": 10,
+        "attackPattern": "sand_wave",
+        "speed": 2.5,
+        "attackCooldown": 2.5,
+        "spawnMinions": true,
+        "minionType": "spiny",
+        "minionCount": 3
+      },
+      {
+        "phase": 3,
+        "hpThreshold": 5,
+        "attackPattern": "burrow_strike",
+        "speed": 3.0,
+        "attackCooldown": 2.0,
+        "spawnMinions": true,
+        "minionType": "spiny",
+        "minionCount": 5
+      }
+    ]
+  }
+}
