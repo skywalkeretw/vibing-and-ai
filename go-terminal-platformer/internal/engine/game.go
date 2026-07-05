@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/gdamore/tcell/v2"
+	"github.com/lukeroy/go-terminal-platformer/internal/input"
 )
 
 // GameState represents the current state of the game
@@ -55,11 +56,11 @@ type Game struct {
 	fpsTimer   float64
 	currentFPS int
 
-	// Game systems (to be implemented in future issues)
-	// renderer    *Renderer
-	// inputMgr    *InputManager
-	// physics     *PhysicsEngine
-	// levelMgr    *LevelManager
+	// Game systems
+	inputMgr *input.InputManager
+	// renderer    *Renderer (to be integrated)
+	// physics     *PhysicsEngine (to be implemented in future issues)
+	// levelMgr    *LevelManager (to be implemented in future issues)
 }
 
 // New creates a new Game instance
@@ -91,6 +92,10 @@ func (g *Game) Initialize() error {
 	g.screen = screen
 	g.running = true
 	g.lastUpdate = time.Now()
+
+	// Initialize input manager
+	g.inputMgr = input.New()
+	g.inputMgr.Initialize(screen)
 
 	log.Println("Game initialized successfully")
 	log.Printf("Target FPS: %d", g.targetFPS)
@@ -137,6 +142,11 @@ func (g *Game) Update() {
 		g.currentFPS = g.frameCount
 		g.frameCount = 0
 		g.fpsTimer = 0
+	}
+
+	// Update input manager
+	if g.inputMgr != nil {
+		g.inputMgr.Update(g.deltaTime)
 	}
 
 	// Poll for events
@@ -441,6 +451,11 @@ func (g *Game) Shutdown() {
 	
 	// Stop the game loop
 	g.running = false
+	
+	// Shutdown input manager
+	if g.inputMgr != nil {
+		g.inputMgr.Shutdown()
+	}
 	
 	// Clean up screen
 	if g.screen != nil {
