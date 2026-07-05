@@ -1,0 +1,96 @@
+{
+  "id": "world3-level6",
+  "world": 3,
+  "levelNum": 6,
+  "name": "Boss - Ice Golem",
+  "width": 200,
+  "height": 30,
+  "tiles": [
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "                                                                                                                                                                                                        ",
+    "========================================================================================================================================================================================================"
+  ],
+  "spawnPoints": [
+    {"type": "player", "x": 10, "y": 27},
+    {"type": "boss", "bossType": "ice_golem", "x": 160, "y": 20, "hp": 20, "phases": 3},
+    {"type": "fireflower", "x": 30, "y": 27}
+  ],
+  "checkpoints": [
+    {"x": 10, "y": 27}
+  ],
+  "goal": {"x": 190, "y": 27},
+  "background": "ice",
+  "theme": "ice_boss",
+  "difficulty": "boss",
+  "timeLimit": 600,
+  "physics": {
+    "slippery": true,
+    "friction": 0.4
+  },
+  "bossArena": {
+    "enabled": true,
+    "bossName": "Ice Golem",
+    "bossType": "ice_golem",
+    "startX": 50,
+    "endX": 190,
+    "phases": [
+      {
+        "phase": 1,
+        "hpThreshold": 20,
+        "attackPattern": "ice_punch",
+        "speed": 1.5,
+        "attackCooldown": 3.5,
+        "abilities": ["ground_pound", "ice_shard"]
+      },
+      {
+        "phase": 2,
+        "hpThreshold": 13,
+        "attackPattern": "ice_storm",
+        "speed": 2.0,
+        "attackCooldown": 3.0,
+        "spawnMinions": true,
+        "minionType": "boo",
+        "minionCount": 3,
+        "abilities": ["ground_pound", "ice_shard", "freeze_wave"]
+      },
+      {
+        "phase": 3,
+        "hpThreshold": 7,
+        "attackPattern": "berserker",
+        "speed": 2.5,
+        "attackCooldown": 2.5,
+        "spawnMinions": true,
+        "minionType": "boo",
+        "minionCount": 5,
+        "abilities": ["ground_pound", "ice_shard", "freeze_wave", "icicle_rain"]
+      }
+    ]
+  }
+}
