@@ -58,6 +58,7 @@ type EnemyBase struct {
 	State         EnemyState
 	FacingRight   bool
 	OnGround      bool
+	IsFlying      bool
 	StateTimer    float64
 	InvulnTimer   float64
 
@@ -106,8 +107,8 @@ func (e *EnemyBase) Update(deltaTime float64) {
 		e.InvulnTimer -= deltaTime
 	}
 
-	// Apply gravity
-	if !e.OnGround {
+	// Apply gravity (not for flying enemies)
+	if !e.OnGround && !e.IsFlying {
 		e.Velocity.Y += 980.0 * deltaTime // Gravity
 	}
 
