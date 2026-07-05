@@ -1,0 +1,102 @@
+{
+  "id": "world4-level6",
+  "world": 4,
+  "levelNum": 6,
+  "name": "Fire Dragon",
+  "width": 250,
+  "height": 30,
+  "tiles": [
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "                                                                                                                                                                                                                                                                                                          ",
+    "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL",
+    "=========================================================================================================================================================================================================================================================================================================="
+  ],
+  "spawnPoints": [
+    {"type": "player", "x": 10, "y": 27},
+    {"type": "fireflower", "x": 30, "y": 27},
+    {"type": "star", "x": 220, "y": 27}
+  ],
+  "checkpoints": [
+    {"x": 20, "y": 27}
+  ],
+  "goal": {"x": 240, "y": 27},
+  "background": "volcano_boss",
+  "theme": "boss_arena",
+  "difficulty": "final-boss",
+  "timeLimit": 600,
+  "boss": {
+    "type": "fire_dragon",
+    "name": "Fire Dragon",
+    "hp": 25,
+    "phases": 3,
+    "spawn_x": 125,
+    "spawn_y": 15,
+    "arena": {
+      "x": 50,
+      "y": 10,
+      "width": 150,
+      "height": 18
+    },
+    "attacks": [
+      {
+        "name": "fireball",
+        "damage": 2,
+        "cooldown": 2.0,
+        "phase": 1
+      },
+      {
+        "name": "flame_breath",
+        "damage": 3,
+        "cooldown": 3.5,
+        "phase": 2
+      },
+      {
+        "name": "meteor_rain",
+        "damage": 4,
+        "cooldown": 5.0,
+        "phase": 3
+      }
+    ],
+    "phase_transitions": [
+      {
+        "phase": 2,
+        "hp_threshold": 17,
+        "speed_multiplier": 1.3
+      },
+      {
+        "phase": 3,
+        "hp_threshold": 8,
+        "speed_multiplier": 1.6
+      }
+    ]
+  },
+  "hazards": [
+    {"type": "lava", "x": 0, "y": 28, "width": 250, "instant_death": true}
+  ]
+}
